@@ -1,0 +1,632 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="600" 
+        Width="1000"
+        MaxHeight="600"
+        MaxWidth="1000"
+        MinHeight="600"
+        MinWidth="1000"
+        Background="#ff110203"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <local:Mode1/>
+    </Window.DataContext>
+
+    <!--#region верхнее меню-->
+    <Window.Resources>
+        <ControlTemplate x:Key="TopMenuButtons" TargetType="Button">
+            <Grid Name="Btn" Height="40" Margin="20,0,0,0">
+                <Border>
+                    <Grid>
+                        <Label Content="{TemplateBinding Content}"
+                        Background="Transparent"
+                        FontSize="23"
+                        VerticalAlignment="Center">
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="FloralWhite"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=Btn}" Value="True">
+                                            <Setter Property="Foreground" Value="FloralWhite"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=IsPressed}" Value="true">
+                                            <Setter Property="Foreground" Value="FloralWhite"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=IsFocused}" Value="true">
+                                            <Setter Property="Foreground" Value="FloralWhite"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        <Label Content="{TemplateBinding Content}" Background="Transparent" VerticalAlignment="Center" FontSize="23" FontWeight="Bold">
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="FloralWhite"/>
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=IsFocused}" Value="true">
+                                            <DataTrigger.Setters>
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <BlurEffect Radius="25"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger.Setters>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                    </Grid>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=IsPressed}" Value="true">
+                                    <Setter Property="Margin" Value="0,2,0,0"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="SlideMenuBtn" TargetType="Button">
+            <Grid Name="Btn" Height="45">
+                <Border>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="2" RenderTransformOrigin="0.5,0.5">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="-1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="YourExpanderStyle" TargetType="Expander">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+
+
+        <Style
+              x:Key="MenuItemStyle"
+              TargetType="{x:Type MenuItem}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Foreground" Value="Aqua" />
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style
+       x:Key="MenuItemStyle2"
+       TargetType="{x:Type MenuItem}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Foreground" Value="Aqua" />
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style
+       x:Key="MenuItemStyle3"
+       TargetType="{x:Type MenuItem}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Foreground" Value="Aqua" />
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style
+       x:Key="MenuItemStyle4"
+       TargetType="{x:Type MenuItem}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Foreground" Value="Aqua" />
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        
+
+    </Window.Resources>
+
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Frame Name="MyFrame"
+               NavigationUIVisibility="Hidden"
+               Grid.Column="0" Grid.ColumnSpan="10"
+               Grid.Row="0" Grid.RowSpan="10"
+               Content="{Binding CurPage}"/>
+
+        <Grid Name="TopMenu" Grid.Row="0" Grid.ColumnSpan="2">
+            <Border BorderThickness="1" 
+                    BorderBrush="#ff303031" 
+                    Background="Black"
+                    Opacity="0.7">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,-1">
+                    <Button Template="{StaticResource TopMenuButtons}" Content="ИГРЫ"/>
+                    <Button Template="{StaticResource TopMenuButtons}" Content="ОБЩЕНИЕ"/>
+                    <Button Template="{StaticResource TopMenuButtons}" Content="МАГАЗИН"/>
+                    <Button Template="{StaticResource TopMenuButtons}" Content="НОВОСТИ"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <!--#endregion-->
+        <!--#endregion-->
+        <!--#region список игр-->
+        <Border Background="Black" 
+                BorderThickness="1" 
+                Grid.Row="1" 
+                Margin="0,0,0,485"
+                 Opacity="0.8"/>
+        <Expander Header="            Ваши игры"
+                  Foreground="White"
+                  IsExpanded="True" 
+                  Margin="0,78,0,3"
+                  Style="{StaticResource YourExpanderStyle}" Grid.RowSpan="2">
+
+            <StackPanel x:Name="menu" 
+                    Grid.Row="1"
+                    Background="Black"
+                             Margin="0,5,0,-3"
+                             Opacity="0.8">
+                <StackPanel Orientation="Horizontal" 
+                        VerticalAlignment="Center"
+                        Margin="0,25,0,0">
+                    <Image Source="/WOW.PNG" Width="46" Height="36"/>
+                    <Button 
+                        Content="World of Warcraft" Width="177" Height="55"
+                        Background="Black"
+                        Foreground="White"
+                        BorderThickness="0" 
+                        PreviewMouseDown="Button_PreviewMouseDown" 
+                        PreviewMouseUp="Button_PreviewMouseUp"
+                        Click="Button_Click_WOW">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="buttonScale"/>
+                        </Button.RenderTransform>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" 
+                                        Background="{TemplateBinding Background}" 
+                                        BorderBrush="{TemplateBinding BorderBrush}" 
+                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="border"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/hs.png" Width="48" Height="44"/>
+                    <Button  Content="Hearthstone" 
+                             Width="175" 
+                             Height="60"
+                             Background="Black"
+                             Foreground="White"
+                             BorderThickness="0"
+                             PreviewMouseDown="Button_PreviewMouseDown" 
+                             PreviewMouseUp="Button_PreviewMouseUp" 
+                             Click="Button_Click_Hs">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="buttonScale2"/>
+                        </Button.RenderTransform>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="border" 
+                                                Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="border"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+                <StackPanel  Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/overwatch.png" Width="47" Height="32"/>
+                    <Button Content="Overwatch" Width="172"
+                        Background="Black"
+                        Foreground="White"
+                        BorderThickness="0"    
+                        PreviewMouseDown="Button_PreviewMouseDown" 
+                        PreviewMouseUp="Button_PreviewMouseUp" Height="55"
+                         Click="Button_Click_OW">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="buttonScale3"/>
+                        </Button.RenderTransform>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="border" 
+                                                Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="border"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/warcraaft3.png" Width="50" Height="55"/>
+                    <Button Content="Warcraft 3" Width="170"
+                        Background="Black"
+                        Foreground="White"
+                        BorderThickness="0"    
+                        PreviewMouseDown="Button_PreviewMouseDown" 
+                        PreviewMouseUp="Button_PreviewMouseUp"
+                        Click="Button_Click_W3">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="buttonScale4"/>
+                        </Button.RenderTransform>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" 
+                                                Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="border"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/diablo.png" Width="52" Height="43"/>
+                    <Button Content="Diablo" Width="167"
+                        Background="Black"
+                        Foreground="White"
+                        BorderThickness="0"    
+                        PreviewMouseDown="Button_PreviewMouseDown" 
+                        PreviewMouseUp="Button_PreviewMouseUp" Height="55"
+                        Click="Button_Click_DIABLO">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="buttonScale5"/>
+                        </Button.RenderTransform>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" 
+                                                Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="border"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/hots.png" Width="50" Height="42"/>
+                    <Button Content="Heroes of the storm" Width="170"
+                        Background="Black"
+                        Foreground="White"
+                        BorderThickness="0"    
+                        PreviewMouseDown="Button_PreviewMouseDown" 
+                        PreviewMouseUp="Button_PreviewMouseUp" Height="60"
+                        Click="Button_Click_HOST">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="buttonScale6"/>
+                        </Button.RenderTransform>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" 
+                                                Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="border"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" 
+                        VerticalAlignment="Center"
+                        Margin="0,10,0,0">
+                    <Image Source="/sc2.png" Width="55" Height="44"/>
+                    <Button Content="Star Craft 2" Width="164"
+                        Background="Black"
+                        Foreground="White"
+                        BorderThickness="0"     
+                        PreviewMouseDown="Button_PreviewMouseDown" 
+                        PreviewMouseUp="Button_PreviewMouseUp" Height="55"
+                        Click="Button_Click_SC2">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="buttonScale7"/>
+                        </Button.RenderTransform>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" 
+                                                Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="border"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" 
+                        VerticalAlignment="Top">
+                    <Image Source="/sc.png" Width="58" Height="41"/>
+                    <Button Content="Star Craft" 
+                        Width="161"
+                        Background="Black"
+                        Foreground="White"
+                        BorderThickness="0"    
+                        PreviewMouseDown="Button_PreviewMouseDown" 
+                        PreviewMouseUp="Button_PreviewMouseUp" Height="60"
+                        Click="Button_Click_SC">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="buttonScale8"/>
+                        </Button.RenderTransform>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="border" 
+                                                Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="border"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Expander>
+
+
+
+
+
+        <!--#region профиль -->
+        <Image Grid.Column="1" 
+               HorizontalAlignment="Left"
+               Height="30" 
+               Margin="575,30,0,0" 
+               VerticalAlignment="Top" 
+               Width="30" 
+               Source="/png-clipart-user-profile-computer-icons-profile-miscellaneous-logo.png"/>
+
+
+
+        <Expander Grid.Column="1" 
+          HorizontalAlignment="Left" 
+          Height="183" 
+          Header="Ваш профиль" 
+          Margin="610,30,0,0" 
+          VerticalAlignment="Top" 
+          Width="160" 
+          Grid.RowSpan="2" 
+          Foreground="White" 
+          RenderTransformOrigin="0.5,0.5"
+          FontSize="20">
+            <Expander.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <ScaleTransform ScaleX="-1"/>
+                    <!-- Отражаем по горизонтали -->
+                    <RotateTransform Angle="0"/>
+                    <!-- Устанавливаем угол поворота в 0 для перевода в исходное положение -->
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Expander.RenderTransform>
+
+            <Grid Background="Black" Margin="0,16,0,-101" Width="142">
+                <Menu Margin="2,-1,1,-3" RenderTransformOrigin="0.5,0.5"
+                      Background="Black">
+                    <Menu.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="-0.754"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-0.487"/>
+                        </TransformGroup>
+                    </Menu.RenderTransform>
+
+                    <MenuItem  Style="{StaticResource MenuItemStyle}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Header=" Профиль" Width="136"
+                               FontSize="25" 
+                               Height="59"
+                               Margin="0,10,0,0"/>
+
+                    <MenuItem  Style="{StaticResource MenuItemStyle2}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Header="Поддержка" Width="143"
+                               FontSize="25" 
+                               Height="63"/>
+
+                    <MenuItem  Style="{StaticResource MenuItemStyle3}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Header=" Настройки" Width="148"
+                               FontSize="25" 
+                               Height="59"/>
+
+                    <MenuItem  Style="{StaticResource MenuItemStyle4}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Header="    Выйти" Width="136"
+                               FontSize="25" 
+                               Height="50"/>
+                    <Style TargetType="MenuItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <!-- Цвет текста при наведении -->
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Menu>
+            </Grid>
+        </Expander>
+        <Button Grid.Column="1" 
+                Content="Button" 
+                HorizontalAlignment="Left" 
+                Margin="502,412,0,0" 
+                Grid.Row="1"
+                VerticalAlignment="Top" 
+                RenderTransformOrigin="0.5,0.5" 
+                Width="242" 
+                Height="68">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.492"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <!--#endregion-->
+
+
+
+
+
+
+    </Grid>
+    <!--#endregion-->
+</Window>

@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="128-1280593_computer-user-icon-img-users.png" />
+    <None Remove="background-white-user-icon-gray-world-of-warcraft-transparent-png-662587.png" />
+    <None Remove="diablo.png" />
+    <None Remove="download_390955.png" />
+    <None Remove="hots.png" />
+    <None Remove="hs.png" />
+    <None Remove="MainDIABLO.png" />
+    <None Remove="MainHOTS.png" />
+    <None Remove="MainHS.png" />
+    <None Remove="MainOW.png" />
+    <None Remove="MainSC.png" />
+    <None Remove="MainSC2.png" />
+    <None Remove="MainW3.png" />
+    <None Remove="MainWOW.png" />
+    <None Remove="overwatch.png" />
+    <None Remove="png-clipart-user-profile-computer-icons-profile-miscellaneous-logo.png" />
+    <None Remove="sc.png" />
+    <None Remove="sc2.png" />
+    <None Remove="TopDIABLO.png" />
+    <None Remove="TopHOTS.png" />
+    <None Remove="TopHS.png" />
+    <None Remove="TopOW.png" />
+    <None Remove="TopSC.png" />
+    <None Remove="TopSC2.png" />
+    <None Remove="TopW3.png" />
+    <None Remove="TopWOW.png" />
+    <None Remove="warcraaft3.png" />
+    <None Remove="WOW.PNG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="128-1280593_computer-user-icon-img-users.png" />
+    <Resource Include="background-white-user-icon-gray-world-of-warcraft-transparent-png-662587.png" />
+    <Resource Include="diablo.png" />
+    <Resource Include="download_390955.png" />
+    <Resource Include="hots.png" />
+    <Resource Include="hs.png" />
+    <Resource Include="MainDIABLO.png" />
+    <Resource Include="MainHOTS.png" />
+    <Resource Include="MainHS.png" />
+    <Resource Include="MainOW.png" />
+    <Resource Include="MainSC.png" />
+    <Resource Include="MainSC2.png" />
+    <Resource Include="MainW3.png" />
+    <Resource Include="MainWOW.png" />
+    <Resource Include="overwatch.png" />
+    <Resource Include="png-clipart-user-profile-computer-icons-profile-miscellaneous-logo.png" />
+    <Resource Include="sc.png" />
+    <Resource Include="sc2.png" />
+    <Resource Include="TopDIABLO.png" />
+    <Resource Include="TopHOTS.png" />
+    <Resource Include="TopHS.png" />
+    <Resource Include="TopOW.png" />
+    <Resource Include="TopSC.png" />
+    <Resource Include="TopSC2.png" />
+    <Resource Include="TopW3.png" />
+    <Resource Include="TopWOW.png" />
+    <Resource Include="warcraaft3.png" />
+    <Resource Include="WOW.PNG" />
+  </ItemGroup>
+
+</Project>

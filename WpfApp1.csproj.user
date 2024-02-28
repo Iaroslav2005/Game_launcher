@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="DIABLO 3.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="DIABLO.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HOST.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Hs.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="OW.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Page1.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Page2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SC2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="W3.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WOW.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DIABLO 3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="DIABLO.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HOST.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Hs.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="OW.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page1.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SC2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="W3.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WOW.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
